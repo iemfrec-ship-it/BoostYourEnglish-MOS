@@ -222,17 +222,8 @@ select{width:100%;padding:.62rem 1rem}
 <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
 <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
 <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-<script type="text/babel">
-const {useState,useEffect,useRef} = React;
-
-/* ── STORAGE ── */
-const LS={get:(k,d)=>{try{const v=localStorage.getItem(k);return v!=null?JSON.parse(v):d}catch{return d}},set:(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch{}}};
-const DEF_PROF='0504', DEF_STU='2024';
-function boot(){if(!LS.get('bye_prof'))LS.set('bye_prof',DEF_PROF);if(!LS.get('bye_stu'))LS.set('bye_stu',DEF_STU);if(!LS.get('bye_extra'))LS.set('bye_extra',[]);if(!LS.get('bye_results'))LS.set('bye_results',[]);}
-boot();
-
-/* ── HARDCODED THEMES ── */
-const HARDCODED_THEMES = [
+<script>
+window.HARDCODED_THEMES = [
   {
     "id": "v1",
     "name": "Security Jobs",
@@ -3021,6 +3012,19 @@ const HARDCODED_THEMES = [
     ]
   }
 ];
+</script>
+<script type="text/babel">
+const {useState,useEffect,useRef} = React;
+
+/* ── STORAGE ── */
+const LS={get:(k,d)=>{try{const v=localStorage.getItem(k);return v!=null?JSON.parse(v):d}catch{return d}},set:(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch{}}};
+const DEF_PROF='0504', DEF_STU='2024';
+function boot(){if(!LS.get('bye_prof'))LS.set('bye_prof',DEF_PROF);if(!LS.get('bye_stu'))LS.set('bye_stu',DEF_STU);if(!LS.get('bye_extra'))LS.set('bye_extra',[]);if(!LS.get('bye_results'))LS.set('bye_results',[]);}
+boot();
+
+/* ── HARDCODED THEMES ── */
+// HARDCODED_THEMES loaded from plain script tag above
+const HARDCODED_THEMES = window.HARDCODED_THEMES;
 
 function getThemes(){
   const extra=LS.get('bye_extra',[]);
